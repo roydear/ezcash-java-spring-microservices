@@ -6,6 +6,7 @@ import com.ec.walletservice.dto.WalletTransferResponse;
 import com.ec.walletservice.exception.InsufficientBalanceException;
 import com.ec.walletservice.exception.ReceiverWalletNotFoundException;
 import com.ec.walletservice.exception.SenderWalletNotFoundException;
+import com.ec.walletservice.exception.WalletNotFoundException;
 import com.ec.walletservice.model.Wallet;
 import com.ec.walletservice.repository.WalletRepository;
 import jakarta.transaction.Transactional;
@@ -24,10 +25,23 @@ public class WalletService {
         this.walletRepository = walletRepository;
     }
 
+    public String createWalletAccount(String userId) {
+        boolean created = false;
+        UUID uuidUserId = UUID.fromString(userId);
+        walletRepository.findByUserId(uuidUserId)
+                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with ID: " + userId));
+
+        Wallet newWallet = new Wallet();
+        newWallet.setUserId(uuidUserId);
+        Wallet save = walletRepository.save(newWallet);
+
+        return save.getId().toString();
+    }
+
     @Cacheable(value = "wallet", key = "#userId")
     public WalletBalanceResponse getBalance(UUID userId) {
         Wallet wallet = walletRepository.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Wallet not found with ID: " + userId));
+                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with ID: " + userId));
 
         return new WalletBalanceResponse(wallet.getUserId(), wallet.getBalance(), wallet.getCurrency());
     }

@@ -21,6 +21,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(WalletNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleWalletNotFoundException(
+            WalletNotFoundException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Wallet not found");
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+
     @ExceptionHandler(SenderWalletNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleSenderWalletNotFoundException(
             SenderWalletNotFoundException ex
