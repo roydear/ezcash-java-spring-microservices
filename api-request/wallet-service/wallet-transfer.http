@@ -1,0 +1,10 @@
+###  Wallet Transfer from receiver to sender
+POST http://localhost:5050/wallet/transfer
+Content-Type: application/json
+
+{
+  "userId": "2d2b5bc8-f9e8-11ee-bb8b-0242ac120002",
+  "receiverId": "4d4b5bc8-f9e8-11ee-bb8b-0242ac120002",
+  "amount": 500.00,
+  "note": "done"
+}
