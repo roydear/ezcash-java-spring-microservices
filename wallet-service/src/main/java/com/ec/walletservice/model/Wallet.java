@@ -23,10 +23,10 @@ public class Wallet {
     private BigDecimal balance;
 
     @NotNull
-    private String currency = "PHP";
+    private String currency;
 
     @NotNull
-    private String status = String.valueOf(WalletStatus.ACTIVE);
+    private String status;
 
     @NotNull
     private LocalDateTime lastUpdated;
