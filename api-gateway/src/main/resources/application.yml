@@ -1,0 +1,22 @@
+server:
+  port: 5055
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: wallet-service-route
+              uri: http://wallet-service:5050
+              predicates:
+                - Path=/api/wallet/**
+              filters:
+                - StripPrefix=1
+
+            - id: api-docs-wallet-route
+              uri: http://wallet-service:5050
+              predicates:
+                - Path=/api-docs/wallet
+              filters:
+                - RewritePath=/api-docs/wallet,/v3/api-docs
