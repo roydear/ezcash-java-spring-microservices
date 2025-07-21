@@ -1,4 +1,4 @@
 ### GET wallet balance request of a user
-GET http://localhost:5050/wallet/balance/47befa5d-9e6a-4e92-b0c6-599f8b996ee3
+GET http://localhost:5055/api/wallet/balance/52d19991-0d66-4174-8be5-11582f9cc6fa
 
 ###
