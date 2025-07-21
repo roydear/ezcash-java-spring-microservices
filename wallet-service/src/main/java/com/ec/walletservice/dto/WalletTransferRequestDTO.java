@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class WalletTransferRequest {
+public class WalletTransferRequestDTO {
 
     @NotBlank(message = "User Id is required")
     private UUID userId;

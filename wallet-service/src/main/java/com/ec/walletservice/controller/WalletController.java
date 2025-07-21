@@ -1,8 +1,8 @@
 package com.ec.walletservice.controller;
 
-import com.ec.walletservice.dto.WalletBalanceResponse;
-import com.ec.walletservice.dto.WalletTransferRequest;
-import com.ec.walletservice.dto.WalletTransferResponse;
+import com.ec.walletservice.dto.WalletBalanceResponseDTO;
+import com.ec.walletservice.dto.WalletTransferRequestDTO;
+import com.ec.walletservice.dto.WalletTransferResponseDTO;
 import com.ec.walletservice.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,14 +24,14 @@ public class WalletController {
 
     @GetMapping("/balance/{userId}")
     @Operation(summary = "Get wallet balance of a user")
-    public ResponseEntity<WalletBalanceResponse> getBalance(@PathVariable UUID userId) {
+    public ResponseEntity<WalletBalanceResponseDTO> getBalance(@PathVariable UUID userId) {
         return ResponseEntity.ok().body(walletService.getBalance(userId));
     }
 
     @PostMapping("/transfer")
     @Operation(summary = "Transfer wallet amount to another wallet")
-    public ResponseEntity<WalletTransferResponse> transfer(@RequestBody WalletTransferRequest request) {
-        WalletTransferResponse transfer = walletService.transfer(request);
+    public ResponseEntity<WalletTransferResponseDTO> transfer(@RequestBody WalletTransferRequestDTO request) {
+        WalletTransferResponseDTO transfer = walletService.transfer(request);
         return ResponseEntity.ok().body(transfer);
     }
 }

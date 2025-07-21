@@ -1,8 +1,8 @@
 package com.ec.walletservice.service;
 
-import com.ec.walletservice.dto.WalletBalanceResponse;
-import com.ec.walletservice.dto.WalletTransferRequest;
-import com.ec.walletservice.dto.WalletTransferResponse;
+import com.ec.walletservice.dto.WalletBalanceResponseDTO;
+import com.ec.walletservice.dto.WalletTransferRequestDTO;
+import com.ec.walletservice.dto.WalletTransferResponseDTO;
 import com.ec.walletservice.exception.InsufficientBalanceException;
 import com.ec.walletservice.exception.ReceiverWalletNotFoundException;
 import com.ec.walletservice.exception.SenderWalletNotFoundException;
@@ -39,15 +39,15 @@ public class WalletService {
     }
 
     @Cacheable(value = "wallet", key = "#userId")
-    public WalletBalanceResponse getBalance(UUID userId) {
+    public WalletBalanceResponseDTO getBalance(UUID userId) {
         Wallet wallet = walletRepository.findByUserId(userId)
                 .orElseThrow(() -> new WalletNotFoundException("Wallet not found with ID: " + userId));
 
-        return new WalletBalanceResponse(wallet.getUserId(), wallet.getBalance(), wallet.getCurrency());
+        return new WalletBalanceResponseDTO(wallet.getUserId(), wallet.getBalance(), wallet.getCurrency());
     }
 
     @Transactional
-    public WalletTransferResponse transfer(WalletTransferRequest request) {
+    public WalletTransferResponseDTO transfer(WalletTransferRequestDTO request) {
         Wallet sender = walletRepository.findByUserId(request.getUserId())
                 .orElseThrow(() -> new SenderWalletNotFoundException("Sender wallet not found with ID: "
                         + request.getUserId()));
@@ -65,7 +65,7 @@ public class WalletService {
 
         walletRepository.saveAll(List.of(sender, receiver));
 
-        return new WalletTransferResponse(
+        return new WalletTransferResponseDTO(
                 request.getReceiverId(),
                 request.getAmount(),
                 request.getNote());
