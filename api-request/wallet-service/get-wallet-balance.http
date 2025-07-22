@@ -1,4 +1,3 @@
 ### GET wallet balance request of a user
-GET http://localhost:5055/api/wallet/balance/52d19991-0d66-4174-8be5-11582f9cc6fa
-
-###
+GET http://localhost:5055/api/wallet/balance/2d2b5bc8-f9e8-11ee-bb8b-0242ac120002
+Authorization: Bearer {{token}}
