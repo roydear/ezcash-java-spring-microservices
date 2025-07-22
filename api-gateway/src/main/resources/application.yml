@@ -31,7 +31,7 @@ spring:
 
             - id: api-docs-auth-route
               uri: http://auth-service:5051
-              predicates:cd git
+              predicates:
                 - Path=/api-docs/auth
               filters:
                 - RewritePath=/api-docs/auth,/v3/api-docs
