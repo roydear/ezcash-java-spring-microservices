@@ -1,0 +1,14 @@
+### Register a new account
+POST http://localhost:5055/auth/registration
+Content-Type: application/json
+
+{
+  "email": "roeder.aringoy@gmail.com",
+  "phoneNumber": "09687726206",
+  "password": "$2b$12$7hoRZfJrRKD2nIm2vHLs7OBETy.LWenXXMLKf99W8M4PUwO6KB7fu",
+  "firstName": "Roy",
+  "lastName": "Aringoy",
+  "role": "USER",
+  "address": "Paciano Rizal",
+  "dateOfBirth": "1991-10-21"
+}
