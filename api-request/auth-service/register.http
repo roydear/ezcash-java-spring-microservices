@@ -3,10 +3,10 @@ POST http://localhost:5055/auth/registration
 Content-Type: application/json
 
 {
-  "email": "roeder.aringoy@gmail.com",
-  "phoneNumber": "09687726206",
+  "email": "roeder.aringoy21@gmail.com",
+  "phoneNumber": "09687726205",
   "password": "$2b$12$7hoRZfJrRKD2nIm2vHLs7OBETy.LWenXXMLKf99W8M4PUwO6KB7fu",
-  "firstName": "Roy",
+  "firstName": "",
   "lastName": "Aringoy",
   "role": "USER",
   "address": "Paciano Rizal",

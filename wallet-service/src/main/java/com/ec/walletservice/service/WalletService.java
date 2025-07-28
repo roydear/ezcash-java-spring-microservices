@@ -21,18 +21,21 @@ public class WalletService {
 
     private final WalletRepository walletRepository;
 
+
+
     public WalletService(WalletRepository walletRepository) {
         this.walletRepository = walletRepository;
     }
 
     public String createWalletAccount(String userId) {
-        boolean created = false;
-        UUID uuidUserId = UUID.fromString(userId);
-        walletRepository.findByUserId(uuidUserId)
-                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with ID: " + userId));
+
+        UUID uuid = UUID.fromString(userId);
+        if(walletRepository.findByUserId(uuid).isPresent()) {
+            throw new WalletNotFoundException("Wallet already exists " + userId);
+        }
 
         Wallet newWallet = new Wallet();
-        newWallet.setUserId(uuidUserId);
+        newWallet.setUserId(uuid);
         Wallet save = walletRepository.save(newWallet);
 
         return save.getId().toString();

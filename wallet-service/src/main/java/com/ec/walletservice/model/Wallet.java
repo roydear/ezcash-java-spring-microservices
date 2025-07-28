@@ -20,13 +20,13 @@ public class Wallet {
     private UUID userId;
 
     @NotNull
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @NotNull
-    private String currency;
+    private String currency = "PHP";
 
     @NotNull
-    private String status;
+    private String status = "ACTIVE";
 
     @NotNull
     private LocalDateTime lastUpdated;

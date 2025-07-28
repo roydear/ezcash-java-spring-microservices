@@ -2,6 +2,7 @@ package com.ec.accountservice.service;
 
 import com.ec.accountservice.dto.AccountRequestDTO;
 import com.ec.accountservice.exception.UserAlreadyExistsException;
+import com.ec.accountservice.grpc.WalletAccountGrpcClient;
 import com.ec.accountservice.model.Account;
 import com.ec.accountservice.repository.AccountRepository;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,12 @@ import org.springframework.stereotype.Service;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final WalletAccountGrpcClient walletAccountGrpcClient;
 
-    public AccountService(AccountRepository accountRepository) {
+
+    public AccountService(AccountRepository accountRepository, WalletAccountGrpcClient walletAccountGrpcClient) {
         this.accountRepository = accountRepository;
+        this.walletAccountGrpcClient = walletAccountGrpcClient;
     }
 
     public String register(AccountRequestDTO request) {
@@ -28,6 +32,8 @@ public class AccountService {
         account.setDateOfBirth(request.getDateOfBirth());
 
         Account newAccount = accountRepository.save(account);
+
+        walletAccountGrpcClient.createWalletAccount(String.valueOf(request.getUserId()));
 
         return newAccount.getId().toString();
     }
