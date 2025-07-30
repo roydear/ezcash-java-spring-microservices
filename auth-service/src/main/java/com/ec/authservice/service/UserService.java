@@ -1,6 +1,8 @@
 package com.ec.authservice.service;
 
 import com.ec.authservice.dto.RegistrationRequestDTO;
+import com.ec.authservice.exception.EmailAlreadyExistsException;
+import com.ec.authservice.exception.PhoneNumberAlreadyExistsException;
 import com.ec.authservice.grpc.AccountServiceGrpcClient;
 import com.ec.authservice.model.User;
 import com.ec.authservice.repository.UserRepository;
@@ -26,11 +28,11 @@ public class UserService {
 
     public void register(RegistrationRequestDTO requestDTO) {
         if (userRepository.findByPhoneNumber(requestDTO.phoneNumber()).isPresent()) {
-            throw new RuntimeException("Phone Number already exists");
+            throw new PhoneNumberAlreadyExistsException("Phone Number already exists");
         }
 
         if (userRepository.findByEmail(requestDTO.email()).isPresent()) {
-            throw new RuntimeException("Email address already exists");
+            throw new EmailAlreadyExistsException("Email address already exists");
         }
 
         User user = new User();

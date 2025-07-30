@@ -32,9 +32,8 @@ public record RegistrationRequestDTO(
         @NotBlank(message = "Address is required")
         String address,
 
-        @Past(message = "Date of  the birth must be in the past")
         @NotBlank(message = "Date of Birth is required")
-        LocalDate dateOfBirth
+        String dateOfBirth
 ) {
 }
 // create a validation
