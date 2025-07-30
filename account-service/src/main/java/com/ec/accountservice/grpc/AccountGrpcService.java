@@ -5,6 +5,7 @@ import account.AccountResponse;
 import com.ec.accountservice.mapper.AccountMapper;
 import com.ec.accountservice.service.AccountService;
 import io.grpc.stub.StreamObserver;
+import jakarta.validation.Valid;
 import net.devh.boot.grpc.server.service.GrpcService;
 import account.AccountServiceGrpc.AccountServiceImplBase;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class AccountGrpcService extends AccountServiceImplBase {
     }
 
     @Override
-    public void createUserAccount(AccountRequest request,
+    public void createUserAccount(@Valid AccountRequest request,
                                   StreamObserver<AccountResponse> responseObserver) {
 
         log.info("createUserAccount request received {}", request.toString());
