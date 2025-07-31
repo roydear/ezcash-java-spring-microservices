@@ -22,7 +22,7 @@ public class WalletController {
         this.walletService = walletService;
     }
 
-    @GetMapping("/balance/{userId}")
+    @GetMapping("/{userId}/balance")
     @Operation(summary = "Get wallet balance of a user")
     public ResponseEntity<WalletBalanceResponseDTO> getBalance(@PathVariable UUID userId) {
         return ResponseEntity.ok().body(walletService.getBalance(userId));
